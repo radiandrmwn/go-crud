@@ -2,6 +2,10 @@
 
 A web-based CRUD (Create, Read, Update, Delete) application crafted with Go and MySQL. This project demonstrates a practical implementation of database operations through a clean web interface, focusing on product and category management.
 
+Developped by
+*Radian Try Darmawan - 5025221097*
+*Albin Maurice Pierre Tardivel - 5999241037*
+
 ## Features
 
 This application brings together essential web development concepts and database operations. At its core, it provides comprehensive product management capabilities, allowing users to create, view, modify and remove product entries. The category system enables logical organization of products, while the MySQL integration ensures reliable data persistence. The web interface presents these features through an intuitive layout, following RESTful architectural principles.
@@ -50,5 +54,3 @@ go-crud-web/
 │   └── product/
 └── main.go
 ```
-
-## Future Development Plans
