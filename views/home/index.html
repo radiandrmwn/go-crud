@@ -10,9 +10,22 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
+    <style>
+      .out-of-stock {
+        background-color: #a8a8a8;
+      }
+      .card {
+        border: 2px solid #a8a8a8 ;
+        text-align: center;
+      }
+      .card-title,
+      .card-text {
+        margin-bottom: 0.5rem; 
+      }
+    </style>
   </head>
   <body>
-    <!-- Navar -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-dark">
       <div class="container">
         <a class="navbar-brand text-light" href="/">Go Products</a>
@@ -30,17 +43,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item pe-3">
-              <a
-                class="nav-link active text-light"
-                aria-current="page"
-                href="/products"
-                >Products</a
-              >
+              <a class="nav-link active text-light" aria-current="page" href="/products">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active text-light" href="/categories"
-                >Categories</a
-              >
+              <a class="nav-link active text-light" href="/categories">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-light" href="/about">About</a>
             </li>
           </ul>
         </div>
@@ -49,7 +58,69 @@
     <!-- End of Navbar -->
 
     <div class="container mt-3">
-      <h1>Hello, world!</h1>
+      <h2>Find Your Products</h2>
+      <hr />
+    
+      <!-- Searchbar -->
+      <div class="row mb-3">
+        <div class="col-md-8">
+          <input
+            type="text"
+            id="searchBar"
+            class="form-control"
+            placeholder="Search for a product..."
+            onkeyup="filterProducts()"
+          />
+        </div>
+        <div class="col-md-4">
+          <select id="categoryFilter" class="form-select" onchange="filterProducts()">
+            <option value="">All Categories</option>
+            {{range .categories}}
+            <option value="{{.Name}}">{{.Name}}</option>
+            {{end}}
+          </select>
+        </div>
+      </div>
+    
+      <!-- Products -->
+      <div id="productGrid" class="row">
+        {{range .products}}
+        <div class="col-md-3 mb-4 product-item" data-category="{{.Category.Name}}">
+          <div class="card {{if eq .Stock 0}}out-of-stock{{end}}">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <h5 class="card-title">{{.Name}}</h5>
+              <p class="card-text">{{.Description}}</p>
+              <p class="card-text">
+                <small class="text-muted">{{.Category.Name}}</small>
+              </p>
+              <p class="card-text">Stock: {{.Stock}}</p>
+            </div>
+          </div>
+        </div>
+        {{end}}
+      </div>
     </div>
+    
+    <script>
+      function filterProducts() {
+        const searchQuery = document.getElementById("searchBar").value.toLowerCase();
+        const selectedCategory = document.getElementById("categoryFilter").value;
+        const productItems = document.querySelectorAll(".product-item");
+    
+        productItems.forEach((item) => {
+          const name = item.querySelector(".card-title").textContent.toLowerCase();
+          const category = item.getAttribute("data-category");
+    
+          const matchesSearch =
+            !searchQuery || name.includes(searchQuery);
+          const matchesCategory =
+            !selectedCategory || category === selectedCategory;
+    
+          item.style.display =
+            matchesSearch && matchesCategory ? "block" : "none";
+        });
+      }
+    </script>
+    
   </body>
 </html>

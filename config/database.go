@@ -10,7 +10,7 @@ import (
 var DB *sql.DB
 
 func ConnectDB() {
-    dsn := "root:@tcp(localhost:3306)/sql_godev?parseTime=true"
+    dsn := "root:root@/go_products?parseTime=true"
     db, err := sql.Open("mysql", dsn)
     if err != nil {
         log.Fatalf("Error opening database: %v", err)

@@ -5,6 +5,7 @@ import (
 	"go-web-native/controllers/categorycontroller"
 	"go-web-native/controllers/homecontroller"
 	"go-web-native/controllers/productcontroller"
+	"go-web-native/controllers/aboutcontroller"
 	"log"
 	"net/http"
 )
@@ -15,7 +16,7 @@ func main() {
 
 	// Routes
 	// 1.Homepage
-	http.HandleFunc("/", homecontroller.Welcome)
+	http.HandleFunc("/", homecontroller.Index)
 
 	// 2. Category
 	http.HandleFunc("/categories", categorycontroller.Index)
@@ -29,6 +30,9 @@ func main() {
 	http.HandleFunc("/products/detail", productcontroller.Detail)
 	http.HandleFunc("/products/edit", productcontroller.Edit)
 	http.HandleFunc("/products/delete", productcontroller.Delete)
+
+	// 4. About
+	http.HandleFunc("/about", aboutcontroller.Index)
 
 	// Run server
 	log.Println("Server running on port: 8080")
