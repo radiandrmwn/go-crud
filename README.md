@@ -6,6 +6,10 @@ Developped by
 *Radian Try Darmawan - 5025221097*
 *Albin Maurice Pierre Tardivel - 5999241037*
 
+## Video Presentation of the application
+
+https://youtu.be/NWE2fTa7Up8
+
 ## Features
 
 This application brings together essential web development concepts and database operations. At its core, it provides comprehensive product management capabilities, allowing users to create, view, modify and remove product entries. The category system enables logical organization of products, while the MySQL integration ensures reliable data persistence. The web interface presents these features through an intuitive layout, following RESTful architectural principles.
