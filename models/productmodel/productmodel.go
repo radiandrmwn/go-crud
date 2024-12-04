@@ -133,6 +133,17 @@ func Update(id int, product entities.Product) bool {
 	return result > 0
 }
 
+func UpdateStock(id int, product entities.Product) bool {
+	_, err := config.DB.Exec("UPDATE products SET stock = ? WHERE id = ?", product.Stock, id)
+	
+	if err != nil {
+		panic(err)
+	}
+
+	return true
+}
+
+
 func Delete(id int) error {
 	_, err := config.DB.Exec("DELETE FROM products WHERE id = ?", id)
 	return err

@@ -14,9 +14,14 @@
       .out-of-stock {
         background-color: #a8a8a8;
       }
+      .in-stock:hover{
+        background-color: #c5d7ff;
+      }
       .card {
         border: 2px solid #a8a8a8 ;
         text-align: center;
+        text-decoration: none; 
+        color: inherit;
       }
       .card-title,
       .card-text {
@@ -33,7 +38,7 @@
             <img src="https://www.its.ac.id/wp-content/uploads/2019/02/Logo-its-biru-transparan.png" alt="ITS_logo" style="width: 50px; height: 30px;">
           </a>
         </li>
-        <a class="navbar-brand text-light" href="/">Go Products</a>
+        <a class="navbar-brand text-light" href="/">All Products</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -91,7 +96,11 @@
       <div id="productGrid" class="row">
         {{range .products}}
         <div class="col-md-3 mb-4 product-item" data-category="{{.Category.Name}}">
-          <div class="card {{if eq .Stock 0}}out-of-stock{{end}}">
+          {{if gt .Stock 0}} 
+          <a class="card in-stock" href="/home/detail?id={{.Id}}">
+          {{else}} <!-- Product not clickable if the stock is null -->
+          <div class="card out-of-stock">
+          {{end}}
             <div class="card-body d-flex flex-column justify-content-center">
               <h5 class="card-title">{{.Name}}</h5>
               <p class="card-text">{{.Description}}</p>
@@ -100,7 +109,11 @@
               </p>
               <p class="card-text">Stock: {{.Stock}}</p>
             </div>
+          {{if gt .Stock 0}}
+          </a>
+          {{else}}
           </div>
+          {{end}}
         </div>
         {{end}}
       </div>
