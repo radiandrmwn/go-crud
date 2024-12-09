@@ -17,7 +17,7 @@ func GetAll() []entities.Category {
 
 	for rows.Next() {
 		var category entities.Category
-		if err := rows.Scan(&category.Id, &category.Name, &category.CreatedAt, &category.UpddatedAt); err != nil {
+		if err := rows.Scan(&category.Id, &category.Name, &category.CreatedAt, &category.UpdatedAt); err != nil {
 			panic(err)
 		}
 
@@ -33,7 +33,7 @@ func Create(category entities.Category) bool {
 		VALUE (?, ?, ?)`,
 		category.Name,
 		category.CreatedAt,
-		category.UpddatedAt,
+		category.UpdatedAt,
 	)
 
 	if err != nil {
@@ -61,7 +61,7 @@ func Detail(id int) entities.Category {
 }
 
 func Update(id int, category entities.Category) bool {
-	query, err := config.DB.Exec(`UPDATE categories SET name = ?, updated_at = ? where id = ?`, category.Name, category.UpddatedAt, id)
+	query, err := config.DB.Exec(`UPDATE categories SET name = ?, updated_at = ? where id = ?`, category.Name, category.UpdatedAt, id)
 	if err != nil {
 		panic(err)
 	}

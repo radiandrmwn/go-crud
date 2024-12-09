@@ -6,5 +6,5 @@ type Category struct {
 	Id         uint
 	Name       string
 	CreatedAt  time.Time
-	UpddatedAt time.Time
+	UpdatedAt time.Time
 }

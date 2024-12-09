@@ -2,14 +2,11 @@ package aboutcontroller
 
 import (
 	"net/http"
-	"text/template"
+	// "text/template"
+
+	"github.com/gin-gonic/gin"
 )
 
-func Index(w http.ResponseWriter, r *http.Request) {
-	temp, err := template.ParseFiles("views/about/index.html")
-	if err != nil {
-		panic(err)
-	}
-
-	temp.Execute(w, nil)
+func Index(c *gin.Context) {
+	c.HTML(http.StatusOK, "about_index.html", nil)
 }
