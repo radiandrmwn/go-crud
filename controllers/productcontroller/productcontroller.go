@@ -1,6 +1,7 @@
 package productcontroller
 
 import (
+	"log"
 	"go-web-native/entities"
 	"go-web-native/models/categorymodel"
 	"go-web-native/models/productmodel"
@@ -58,19 +59,29 @@ func Add(c *gin.Context) {
 }
 
 func Detail(c *gin.Context) {
-	idString := c.Query("id")
-	id, err := strconv.Atoi(idString)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
-		return
-	}
+    idString := c.Query("id")
+    id, err := strconv.Atoi(idString)
+    if err != nil {
+        log.Printf("Error: Invalid product ID - %v", err)
+        c.String(http.StatusBadRequest, "Invalid product ID")
+        return
+    }
 
-	product := productmodel.Detail(id)
-	data := gin.H{
-		"product": product,
-	}
-	c.HTML(http.StatusOK, "product_detail.html", data)
+    product := productmodel.Detail(id)
+    if product.Id == 0 {
+        log.Printf("Error: Product with ID %d not found", id)
+        c.String(http.StatusNotFound, "Product not found")
+        return
+    }
+
+    data := gin.H{
+        "product": product,
+    }
+
+    // Ensure the correct template exists
+    c.HTML(http.StatusOK, "product_detail.html", data)
 }
+
 
 func EditGet(c *gin.Context) {
 	idString := c.Query("id")

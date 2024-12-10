@@ -1,0 +1,46 @@
+/* custom.css */
+
+/* Change main background and text color */
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Style the table */
+table {
+    color: #ffffff;
+}
+
+/* Style table borders */
+.table td, .table th {
+    border-color: #404040;
+    color: #ffffff;
+}
+
+/* Style the product list heading */
+.list-products h2 {
+    color: #ffffff;
+}
+
+/* Style the add product button */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* Keep the action buttons their original colors */
+.btn-info.detail {
+    background-color: #0dcaf0;
+}
+
+.btn-warning.edit {
+    background-color: #ffc107;
+}
+
+.btn-danger.delete {
+    background-color: #dc3545;
+}
+
+.container {
+    background-color: aq !important;
+}
