@@ -97,17 +97,25 @@
         {{range .products}}
         <div class="col-md-3 mb-4 product-item" data-category="{{.Category.Name}}">
           {{if gt .Stock 0}} 
-          <a class="card in-stock" href="/home/detail?id={{.Id}}">
-          {{else}} <!-- Product not clickable if the stock is null -->
-          <div class="card out-of-stock">
+          <a class="text-decoration-none" href="/home/detail?id={{.Id}}">
+          {{else}}
+          <div>
           {{end}}
-            <div class="card-body d-flex flex-column justify-content-center">
-              <h5 class="card-title">{{.Name}}</h5>
-              <p class="card-text">{{.Description}}</p>
-              <p class="card-text">
-                <small class="text-muted">{{.Category.Name}}</small>
-              </p>
-              <p class="card-text">Stock: {{.Stock}}</p>
+            <div class="card h-100 shadow-sm">
+              <div class="card-body {{if le .Stock 0}}out-of-stock{{end}}">
+                <h5 class="card-title">{{.Name}}</h5>
+                <p class="card-text text-muted">{{.Description}}</p>
+                <p class="card-text">
+                  <small class="text-muted">{{.Category.Name}}</small>
+                </p>
+                <p class="card-text">
+                  {{if gt .Stock 0}}
+                  <span class="fw-bold text-success">Stock: {{.Stock}}</span>
+                  {{else}}
+                  <span class="fw-bold text-danger">Out of Stock</span>
+                  {{end}}
+                </p>
+              </div>
             </div>
           {{if gt .Stock 0}}
           </a>
